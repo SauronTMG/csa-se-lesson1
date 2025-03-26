@@ -13,7 +13,7 @@ public class Student {
     /*
      * Sets study planner and scanner
      */
-    public Student {
+    public Student() {
         planner = new StudyPlanner();
         scanner = new Scanner(System.in);
     }
@@ -30,7 +30,7 @@ public class Student {
             System.out.println(planner.getOptions());
             System.out.print("Enter option: ");
             option = scanner.nextInt();
-            scanner.nextLine();
+            scanner.nextLine(); // Consume newline
             runChoice(option);
         }
     }
@@ -58,6 +58,12 @@ public class Student {
         String name = scanner.nextLine();
         System.out.print("Enter due date (YYYY-MM-DD): ");
         String dueDate = scanner.nextLine();
-        planner.addAssignment(name, dueDate);
+        
+        // Validate the date format (this is a simple check, but you could add more checks)
+        if (dueDate.matches("\\d{4}-\\d{2}-\\d{2}")) {
+            planner.addAssignment(name, dueDate);
+        } else {
+            System.out.println("Invalid date format! Please enter in YYYY-MM-DD format.");
+        }
     }
 }
